@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06111f">
+  <meta name="description" content="Website biodata dan perjalanan diri Radit Setya Putra.">
+  <title>Radit Setya Putra | My Profile</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --cyan: #00eaff;
+      --blue: #168cff;
+      --bg: #06111f;
+      --panel: rgba(10, 29, 49, .72);
+      --text: #edfaff;
+      --muted: #a2bacb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-color: var(--cyan) var(--bg);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 10% 20%, #006d9c33, transparent 42%),
+        radial-gradient(ellipse at 90% 70%, #0055ff22, transparent 40%),
+        linear-gradient(145deg, #06111f, #071726 60%, #030a13);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: .14;
+      pointer-events: none;
+      background-image: radial-gradient(#72eaff 1px, transparent 1px);
+      background-size: 35px 35px;
+    }
+
+    a, button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--cyan);
+      text-shadow: 0 0 18px #00eaff77;
+    }
+
+    .nav-label {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .hero {
+      min-height: 100svh;
+      padding: 110px 20px 55px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .profile-photo {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--cyan);
+      padding: 5px;
+      background: #081b2b;
+      box-shadow: 0 0 22px #00eaff70, 0 0 65px #008cff38;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .status {
+      margin-top: 30px;
+      padding: 8px 16px;
+      border: 1px solid #00eaff55;
+      background: #00eaff0d;
+      border-radius: 50px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--cyan);
+    }
+
+    .hero h1 {
+      margin-top: 20px;
+      font-size: clamp(30px, 7vw, 65px);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      text-shadow: 0 0 30px #00cfff30;
+    }
+
+    .hero h1 span {
+      color: var(--cyan);
+    }
+
+    .hero p {
+      margin-top: 18px;
+      max-width: 550px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .scroll-cue {
+      margin-top: 38px;
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 2px;
+      animation: bob 2s infinite;
+    }
+
+    .scroll-cue span {
+      display: block;
+      font-size: 24px;
+      margin-top: 8px;
+    }
+
+    .section {
+      width: min(100% - 36px, 900px);
+      margin: 0 auto;
+      padding: 90px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-heading small {
+      color: var(--cyan);
+      letter-spacing: 4px;
+      font-size: 10px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(25px, 5vw, 36px);
+      margin-top: 12px;
+    }
+
+    .section-heading h2 span {
+      color: var(--cyan);
+    }
+
+    .glass {
+      background: var(--panel);
+      border: 1px solid #00eaff24;
+      border-radius: 22px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 0 35px #00aaff0a, inset 0 0 25px #00eaff05;
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+    }
+
+    .glass:hover {
+      border-color: #00eaff70;
+      box-shadow: 0 0 35px #00eaff12, 0 0 70px #008cff0c;
+    }
+
+    .bio-card {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 28px;
+    }
+
+    .bio-item {
+      padding: 19px 0;
+      border-bottom: 1px solid #a2bacb18;
+      min-width: 0;
+    }
+
+    .bio-item:last-child {
+      border-bottom: none;
+    }
+
+    .bio-item small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .bio-item p {
+      font-size: 14px;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .bio-item p.highlight {
+      color: var(--cyan);
+    }
+
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .hobby {
+      padding: 25px 10px;
+      text-align: center;
+    }
+
+    .hobby .emoji {
+      font-size: 29px;
+      display: block;
+      margin-bottom: 13px;
+    }
+
+    .hobby p {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .motto-card {
+      text-align: center;
+      padding: 35px 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-mark {
+      font-size: 65px;
+      line-height: 1;
+      color: var(--cyan);
+      opacity: .65;
+      font-family: Georgia, serif;
+    }
+
+    .motto-card blockquote {
+      font-size: clamp(18px, 4vw, 25px);
+      font-weight: 500;
+      line-height: 1.8;
+      margin: 12px auto 18px;
+      max-width: 650px;
+    }
+
+    .motto-card blockquote span {
+      color: var(--cyan);
+    }
+
+    .motto-card small {
+      color: var(--muted);
+      letter-spacing: 2px;
+      font-size: 10px;
+    }
+
+    .music-card {
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .record-wrap {
+      width: 125px;
+      height: 125px;
+      flex-shrink: 0;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .record {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: repeating-radial-gradient(
+        circle at center,
+        #101820 0 3px,
+        #283542 4px 5px,
+        #0b1017 6px 8px
+      );
+      border: 2px solid #3d5668;
+      box-shadow: 0 0 20px #00eaff26;
+      animation: spin 5s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .record::before {
+      content: "";
+      position: absolute;
+      inset: 35%;
+      border: 2px solid #00eaff77;
+      border-radius: 50%;
+    }
+
+    .record::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .music-note {
+      position: relative;
+      z-index: 2;
+      width: 76px;
+      height: 76px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 22px #00eaff66;
+    }
+
+    .music-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .music-info small {
+      color: var(--cyan);
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .music-info h3 {
+      font-size: 16px;
+      margin: 8px 0 5px;
+    }
+
+    .music-info p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .music-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 17px;
+    }
+
+    .play-btn {
+      width: 43px;
+      height: 43px;
+      border: 1px solid var(--cyan);
+      border-radius: 50%;
+      background: #00eaff12;
+      color: var(--cyan);
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 18px #00eaff22;
+      transition: .25s;
+    }
+
+    .play-btn:hover {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: 0 0 28px #00eaff66;
+    }
+
+    .music-status {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .volume {
+      width: 100%;
+      max-width: 105px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .footer {
+      padding: 35px 20px 100px;
+      text-align: center;
+      border-top: 1px solid #00eaff16;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .footer span {
+      color: var(--cyan);
+    }
+
+    /* Efek fade-in ketika bagian terlihat */
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity .85s ease, transform .85s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Tombol musik tetap mudah dijangkau di HP */
+    .mini-music {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      width: 48px;
+      height: 48px;
+      border: 1px solid #00eaff70;
+      border-radius: 50%;
+      background: #071a2aee;
+      color: var(--cyan);
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 25px #00eaff30;
+      display: none;
+    }
+
+    .mini-music.visible {
+      display: block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(7px); }
+    }
+
+    @media (max-width: 600px) {
+      .navbar { padding: 20px 6%; }
+      .nav-label { font-size: 9px; }
+      .profile-photo { width: 145px; height: 145px; }
+      .section { padding: 65px 0; }
+      .bio-card { grid-template-columns: 1fr; padding: 20px; }
+      .bio-item { padding: 16px 0; }
+      .bio-item:last-child { border-bottom: 1px solid #a2bacb18; }
+      .hobby-grid { grid-template-columns: repeat(2, 1fr); }
+      .music-card { gap: 15px; padding: 17px; }
+      .record-wrap { width: 100px; height: 100px; }
+      .music-note { width: 62px; height: 62px; }
+      .music-info h3 { font-size: 14px; }
+      .volume { max-width: 75px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">RSP<span>.</span></div>
+    <div class="nav-label">MY PERSONAL WEBSITE</div>
+  </nav>
+
+  <header class="hero">
+    <img
+      class="profile-photo"
+      src="foto.jpg"
+      alt="Foto profil"
+      onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22170%22 height=%22170%22 viewBox=%220 0 170 170%22%3E%3Crect width=%22170%22 height=%22170%22 rx=%2285%22 fill=%22%230a263b%22/%3E%3Ctext x=%2285%22 y=%2299%22 text-anchor=%22middle%22 font-size=%2250%22 fill=%22%2300eaff%22 font-family=%22Arial%22%3ERSP%3C/text%3E%3C/svg%3E';"
+    >
+
+    <div class="status">● PERSONAL PROFILE / 2026</div>
+
+    <h1>Radit Setya<br><span>Putra.</span></h1>
+
+    <p>
+      Halo! Selamat datang di website pribadiku.
+      Kenali sedikit tentang diriku, hal yang kusukai,
+      dan perjalanan menuju masa depan.
+    </p>
+
+    <a href="#biodata" class="scroll-cue">
+      SCROLL UNTUK MENGENAL SAYA
+      <span>↓</span>
+    </a>
+  </header>
+
+  <main>
+    <section class="section" id="biodata">
+      <div class="section-heading reveal">
+        <small>01 — INTRODUCTION</small>
+        <h2>Tentang <span>Saya</span></h2>
+      </div>
+
+      <div class="bio-card glass reveal">
+        <div class="bio-item">
+          <small>NAMA LENGKAP</small>
+          <p class="highlight">Radit Setya Putra</p>
+        </div>
+
+        <div class="bio-item">
+          <small>UMUR</small>
+          <p>14 Tahun</p>
+        </div>
+
+        <div class="bio-item">
+          <small>TANGGAL LAHIR</small>
+          <p>15 April 2012</p>
+        </div>
+
+        <div class="bio-item">
+          <small>DOMISILI</small>
+          <p>Kabupaten Semarang</p>
+        </div>
+
+        <div class="bio-item">
+          <small>STATUS</small>
+          <p>Pelajar (SMP)</p>
+        </div>
+
+        <div class="bio-item">
+          <small>PENDIDIKAN</small>
+          <p>SMP NEGERI 2 JAMBU</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <small>02 — MY INTERESTS</small>
+        <h2>Hal yang <span>Saya Sukai</span></h2>
+      </div>
+
+      <div class="hobby-grid">
+        <div class="hobby glass reveal">
+          <span class="emoji">🎬</span>
+          <p>Editing</p>
+        </div>
+
+        <div class="hobby glass reveal">
+          <span class="emoji">💻</span>
+          <p>Coding</p>
+        </div>
+
+        <div class="hobby glass reveal">
+          <span class="emoji">🎮</span>
+          <p>Gaming</p>
+        </div>
+
+        <div class="hobby glass reveal">
+          <span class="emoji">🌙</span>
+          <p>Lying Around</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <small>03 — MY MOTIVATION</small>
+        <h2>Prinsip <span>Hidup</span></h2>
+      </div>
+
+      <div class="motto-card glass reveal">
+        <div class="quote-mark">“</div>
+        <blockquote>
+          Aku tidak harus menjadi hebat <span>hari ini.</span>
+          Aku hanya perlu terus belajar, berani mencoba,
+          dan menjadi lebih baik dari diriku yang kemarin.
+        </blockquote>
+        <small>GROW AT YOUR OWN PACE</small>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <small>04 — MY PLAYLIST</small>
+        <h2>Musik Favorit <span>Saya</span></h2>
+      </div>
+
+      <div class="music-card glass reveal">
+        <div class="record-wrap">
+          <div class="record" id="record"></div>
+          <img
+            class="music-note"
+            src="fotonot.jpg"
+            alt="Gambar not musik"
+            onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2250%22 fill=%22%23081b2b%22/%3E%3Ctext x=%2250%22 y=%2270%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22%2300eaff%22%3E%E2%99%AB%3C/text%3E%3C/svg%3E';"
+          >
+        </div>
+
+        <div class="music-info">
+          <small>NOW PLAYING</small>
+          <h3>Di Tepian Rindu</h3>
+          <p>Davi Siumbing</p>
+
+          <div class="music-controls">
+            <button
+              class="play-btn"
+              id="playBtn"
+              type="button"
+              aria-label="Putar musik"
+              aria-pressed="false"
+            >▶</button>
+
+            <div>
+              <div class="music-status" id="musicStatus" aria-live="polite">
+                Tekan play untuk mendengarkan
+              </div>
+              <input
+                class="volume"
+                id="volume"
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value="0.7"
+                aria-label="Volume musik"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <audio id="audio" src="laguku.mp3" loop preload="metadata"></audio>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Terima kasih sudah berkunjung 👋</p>
+    <p>Dibuat dengan <span>☄ cyan energy</span> dan semangat belajar.</p>
+    <p>© 2026 — Radit Setya Putra</p>
+  </footer>
+
+  <button class="mini-music" id="miniMusic" aria-label="Putar atau jeda musik">♫</button>
+
+  <script>
+    // Fade-in saat elemen masuk ke layar
+    const revealElements = document.querySelectorAll('.reveal');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealElements.forEach(element => observer.observe(element));
+    } else {
+      revealElements.forEach(element => element.classList.add('show'));
+    }
+
+    // Pemutar musik
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const musicStatus = document.getElementById('musicStatus');
+    const record = document.getElementById('record');
+    const volume = document.getElementById('volume');
+    const miniMusic = document.getElementById('miniMusic');
+
+    audio.volume = Number(volume.value);
+
+    function updateMusicUI(isPlaying) {
+      playBtn.textContent = isPlaying ? 'Ⅱ' : '▶';
+      playBtn.setAttribute('aria-label', isPlaying ? 'Jeda musik' : 'Putar musik');
+      playBtn.setAttribute('aria-pressed', String(isPlaying));
+      record.style.animationPlayState = isPlaying ? 'running' : 'paused';
+      musicStatus.textContent = isPlaying
+        ? 'Sedang diputar ♪'
+        : 'Musik dijeda';
+      miniMusic.classList.toggle('visible', isPlaying);
+      miniMusic.textContent = isPlaying ? 'Ⅱ' : '♫';
+    }
+
+    async function toggleMusic() {
+      if (audio.paused) {
+        try {
+          await audio.play();
+          updateMusicUI(true);
+        } catch (error) {
+          updateMusicUI(false);
+          musicStatus.textContent =
+            'Musik gagal diputar. Periksa file laguku.mp3.';
+        }
+      } else {
+        audio.pause();
+        updateMusicUI(false);
+      }
+    }
+
+    playBtn.addEventListener('click', toggleMusic);
+    miniMusic.addEventListener('click', toggleMusic);
+
+    volume.addEventListener('input', () => {
+      audio.volume = Number(volume.value);
+    });
+
+    audio.addEventListener('play', () => updateMusicUI(true));
+    audio.addEventListener('pause', () => updateMusicUI(false));
+
+    audio.addEventListener('error', () => {
+      musicStatus.textContent = 'File laguku.mp3 tidak ditemukan.';
+      updateMusicUI(false);
+    });
+
+    // Browser biasanya melarang autoplay bersuara sebelum ada interaksi.
+    // Karena itu, musik bisa dimulai melalui tombol Play.
+  </script>
+</body>
+  </html>
